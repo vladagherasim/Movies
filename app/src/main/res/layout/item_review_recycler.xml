@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_13sdp"
+    android:background="@color/dark_background_181920"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <ImageView
+        android:id="@+id/star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_star_small"
+        app:layout_constraintBottom_toBottomOf="@id/rating"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_7sdp"
+        android:fontFamily="@font/sf_pro_text_semi_bold"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintStart_toEndOf="@+id/star"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="3.4" />
+
+    <TextView
+        android:id="@+id/titleReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_9sdp"
+        android:fontFamily="@font/sf_pro_text_semi_bold"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/star"
+        tools:text="Review title" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_9sdp"
+        android:fontFamily="@font/sf_pro_text_medium"
+        android:textColor="@color/gray_text_c7c7c7"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleReview"
+        tools:text="Vlada Gherasim" />
+
+    <ImageView
+        android:id="@+id/calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:src="@drawable/ic_calendar_small"
+        app:layout_constraintBottom_toBottomOf="@id/author"
+        app:layout_constraintStart_toEndOf="@+id/author"
+        app:layout_constraintTop_toTopOf="@+id/author" />
+
+    <TextView
+        android:id="@+id/reviewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:fontFamily="@font/sf_pro_text_medium"
+        android:textColor="@color/gray_text_c7c7c7"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/calendar"
+        app:layout_constraintStart_toEndOf="@+id/calendar"
+        app:layout_constraintTop_toTopOf="@+id/calendar"
+        tools:text="13 July 2022" />
+
+    <TextView
+        android:id="@+id/reviewContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:fontFamily="@font/sf_pro_text_medium"
+        android:textColor="@color/gray_text_c7c7c7"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/author"
+        tools:text="@string/give_review" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

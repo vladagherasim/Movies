@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_background_181920"
+    tools:context=".ui.FragmentDetails">
+
+    <ImageView
+        android:id="@+id/imageInDetails"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_262sdp"
+        android:src="@drawable/ic_star_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/movieInfoContainer"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageInDetails"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:layout_marginStart="@dimen/padding_small"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/titleInDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        android:fontFamily="@font/sf_pro_text_semi_bold"
+        android:textSize="@dimen/_13ssp"
+        tools:text="Movie Title"/>
+
+        <ImageView
+            android:id="@+id/starSmall"
+            android:src="@drawable/ic_star_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/titleInDetails"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_7sdp"/>
+
+        <TextView
+            android:id="@+id/pointsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/starSmall"
+            app:layout_constraintTop_toTopOf="@+id/starSmall"
+            app:layout_constraintBottom_toBottomOf="@+id/starSmall"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textSize="@dimen/_10ssp"
+            tools:text="3.4"/>
+
+        <ImageView
+            android:id="@+id/calendarSmall"
+            android:src="@drawable/ic_calendar_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/pointsText"
+            app:layout_constraintTop_toBottomOf="@+id/titleInDetails"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_7sdp"/>
+
+        <TextView
+            android:id="@+id/yearTextInDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/calendarSmall"
+            app:layout_constraintTop_toTopOf="@+id/starSmall"
+            app:layout_constraintBottom_toBottomOf="@+id/starSmall"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textSize="@dimen/_10ssp"
+            tools:text="2022"/>
+
+        <TextView
+            android:id="@+id/genresTextInDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/starSmall"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/dark_gray_484950"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textSize="@dimen/_10ssp"
+            tools:text="Horror Thriller"/>
+
+        <TextView
+            android:id="@+id/reviewsOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genresTextInDetails"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:textColor="@color/dark_gray_484950"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textSize="@dimen/_10ssp"
+            tools:text="This is the review placeholder"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reviewsRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieInfoContainer"
+        android:layout_marginStart="@dimen/padding_small"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

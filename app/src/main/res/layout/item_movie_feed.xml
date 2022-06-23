@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movieInFeedContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_18sdp"
+    android:background="@color/dark_background_181920">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/textConstraint"
+        android:layout_width="@dimen/_193sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/movieImage"
+        app:layout_constraintTop_toTopOf="@id/movieImage">
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Movie Title" />
+
+        <ImageView
+            android:id="@+id/starIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/content_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ratingText"
+            app:layout_constraintBottom_toBottomOf="@id/ratingText"
+            app:srcCompat="@drawable/ic_star_small" />
+
+        <ImageView
+            android:id="@+id/calendarIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:contentDescription="@string/content_description"
+            android:layout_marginStart="@dimen/_14sdp"
+            app:layout_constraintStart_toEndOf="@+id/ratingText"
+            app:layout_constraintTop_toTopOf="@id/yearText"
+            app:layout_constraintBottom_toBottomOf="@id/ratingText"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_calendar_small" />
+
+        <TextView
+            android:id="@+id/ratingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintStart_toEndOf="@+id/starIcon"
+            app:layout_constraintTop_toBottomOf="@+id/titleText"
+            tools:text="4.3" />
+
+        <TextView
+            android:id="@+id/yearText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintStart_toEndOf="@+id/calendarIcon"
+            app:layout_constraintTop_toBottomOf="@+id/titleText"
+            tools:text="2021" />
+
+        <TextView
+            android:id="@+id/genresText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:textColor="@color/dark_gray_484950"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/starIcon"
+            tools:text="Drama, Comedy" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/movieImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/moviePoster"
+            android:layout_width="@dimen/_74sdp"
+            android:layout_height="@dimen/_89sdp"
+            android:contentDescription="@string/content_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

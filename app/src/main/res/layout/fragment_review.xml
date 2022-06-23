@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_background_181920"
+    tools:context=".ui.FragmentReview">
+
+    <ImageView
+        android:id="@+id/movieReviewImage"
+        android:contentDescription="@string/content_description"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_197sdp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/movieTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:fontFamily="@font/sf_pro_text_semi_bold"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movieReviewImage"
+        tools:text="Movie Title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        app:layout_goneMarginStart="@dimen/_24sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_14sdp"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieTitle">
+
+        <TextView
+            android:id="@+id/ratingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/movie_rating" />
+
+        <ImageView
+
+            android:id="@+id/one_star"
+            android:contentDescription="@string/content_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/ic_start_big_outline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ratingText" />
+
+        <ImageView
+            android:id="@+id/two_star"
+            android:contentDescription="@string/content_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:src="@drawable/ic_start_big_outline"
+            app:layout_constraintStart_toEndOf="@+id/one_star"
+            app:layout_constraintTop_toTopOf="@+id/one_star"
+            tools:layout_editor_absoluteY="451dp" />
+
+        <ImageView
+            android:id="@+id/three_star"
+            android:contentDescription="@string/content_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:src="@drawable/ic_start_big_outline"
+            app:layout_constraintStart_toEndOf="@+id/two_star"
+            app:layout_constraintTop_toTopOf="@+id/two_star" />
+
+        <ImageView
+            android:id="@+id/four_star"
+            android:contentDescription="@string/content_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:src="@drawable/ic_start_big_outline"
+            app:layout_constraintStart_toEndOf="@+id/three_star"
+            app:layout_constraintTop_toTopOf="@+id/three_star"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="451dp" />
+
+        <ImageView
+            android:id="@+id/five_star"
+            android:contentDescription="@string/content_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:src="@drawable/ic_start_big_outline"
+            app:layout_constraintStart_toEndOf="@+id/four_star"
+            app:layout_constraintTop_toTopOf="@+id/four_star"
+            tools:layout_editor_absoluteY="487dp" />
+
+        <TextView
+            android:id="@+id/giveTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:text="@string/give_review_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/one_star" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reviewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/shape_review_title_text_box"
+            android:hint="@string/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/giveTitleText" />
+
+        <TextView
+            android:id="@+id/leaveReviewText"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:text="@string/leave_review"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reviewTitle" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reviewText"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_review_text_box"
+            android:hint="@string/give_review"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/leaveReviewText" />
+
+        <Button
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_submit_button"
+            android:backgroundTint="@null"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:text="@string/submit_review"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reviewText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

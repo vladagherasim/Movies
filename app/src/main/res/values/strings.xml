@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Movies</string>
+    <string name="content_description">Image</string>
+    <string name="movie_rating">How would you rate this movie?</string>
+    <string name="title">Title</string>
+    <string name="give_review">Write your review</string>
+    <string name="leave_review">Leave a review</string>
+    <string name="submit_review">Submit</string>
+    <string name="give_review_title">Give a title</string>
+</resources>
