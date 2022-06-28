@@ -1,6 +1,6 @@
 package com.example.movies.data
 
-import com.example.movies.data.dto.MovieDetailsDTO
+import com.example.movies.data.dto.MovieDTO
 import com.example.movies.ui.ItemMovie
 import com.example.movies.ui.ItemReview
 import javax.inject.Inject
@@ -15,7 +15,7 @@ class MovieRepository @Inject constructor
                 it.title,
                 it.voteAverage,
                 //TODO figure out how to get the image link and the genres properly
-                it.originalLanguage,
+                it.backdropPath,
                 it.releaseDate,
                 it.overview
             )
@@ -35,7 +35,7 @@ class MovieRepository @Inject constructor
         }
     }
 
-    suspend fun getMovieDetails(id: Int): MovieDetailsDTO {
+    suspend fun getMovieDetails(id: Int): MovieDTO {
         return movieService.getMovieDetails(id)
     }
 }

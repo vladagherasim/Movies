@@ -3,18 +3,18 @@ package com.example.movies.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.movies.R
 import com.example.movies.databinding.ItemMovieFeedBinding
 import com.example.movies.databinding.ItemReviewRecyclerBinding
 
 class MovieAdapter(
     private val itemClickListener: (Int) -> Unit
-) : ListAdapter<Item, MovieViewHolder>(ItemDiffCallbacks()) {
+) : ListAdapter<Item, ViewHolder>(ItemDiffCallbacks()) {
 
     private val itemMovie: Int = 1
     private val itemReview: Int = 2
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         when (viewType) {
             itemMovie -> {
                 val binding = ItemMovieFeedBinding.inflate(
@@ -30,12 +30,13 @@ class MovieAdapter(
                     parent,
                     false
                 )
+                return ReviewViewHolder(binding)
             }
             else -> throw IllegalArgumentException("No such type")
         }
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         onBindViewHolder(holder, position, mutableListOf())
     }
 
@@ -48,32 +49,52 @@ class MovieAdapter(
     }
 
     override fun onBindViewHolder(
-        holder: MovieViewHolder,
+        holder: ViewHolder,
         position: Int,
         payloads: MutableList<Any>
     ) {
-        val item = getItem(position) as ItemMovie? ?: return
-        val myPayload = payloads.firstOrNull() as List<*>?
-        if (myPayload.isNullOrEmpty()) {
-            holder.bind(item)
-        } else myPayload.forEach {
-            when (it) {
-                is MoviePayloads.TitleChanged -> holder.setMovieTitle(it.newTitle)
-                is MoviePayloads.ReleaseYearChanged -> holder.setMovieYear(it.newYear)
-                is MoviePayloads.RatingChanged -> holder.setMovieRating(it.newRating)
-                is MoviePayloads.ImageChanged -> holder.setMovieImage(it.newImage)
-                is MoviePayloads.DescriptionChanged -> holder.setMovieGenres(it.newDescription)
+        when (holder) {
+            is MovieViewHolder -> {
+                val item = getItem(position) as ItemMovie? ?: return
+                val myPayload = payloads.firstOrNull() as List<*>?
+                if (myPayload.isNullOrEmpty()) {
+                    holder.bind(item)
+                } else myPayload.forEach {
+                    when (it) {
+                        is MoviePayloads.TitleChanged -> holder.setMovieTitle(it.newTitle)
+                        is MoviePayloads.ReleaseYearChanged -> holder.setMovieYear(it.newYear)
+                        is MoviePayloads.RatingChanged -> holder.setMovieRating(it.newRating)
+                        is MoviePayloads.ImageChanged -> holder.setMovieImage(it.newImage)
+                        is MoviePayloads.DescriptionChanged -> holder.setMovieGenres(it.newDescription)
+                    }
+                }
+                holder.setOnClickListener(item)
+            }
+            is ReviewViewHolder -> {
+                val item = getItem(position) as ItemReview? ?: return
+                val myPayload = payloads.firstOrNull() as List<*>?
+                if (myPayload.isNullOrEmpty()) {
+                    holder.bind(item)
+                } else myPayload.forEach {
+                    when (it) {
+                        is ReviewPayloads.TitleChanged -> holder.setReviewTitle(it.newTitle)
+                        is ReviewPayloads.ContentChanged -> holder.setReviewContent(it.newContent)
+                        is ReviewPayloads.AuthorChanged -> holder.setReviewAuthor(it.newAuthor)
+                        is ReviewPayloads.DateChanged -> holder.setReviewDate(it.newDate)
+                        is ReviewPayloads.RatingChanged -> holder.setReviewRating(it.newRating)
+                    }
+                }
             }
         }
-        holder.setOnClickListener(item)
+
     }
 
 }
 
-class MovieViewHolder(
+class MovieViewHolder (
     private val binding: ItemMovieFeedBinding,
     private val itemClickListener: (Int) -> Unit
-) : RecyclerView.ViewHolder(binding.root) {
+) : ViewHolder(binding.root) {
 
     fun bind(item: ItemMovie) {
         setMovieGenres(item.description)
@@ -114,7 +135,7 @@ class MovieViewHolder(
 
 class ReviewViewHolder(
     private val binding: ItemReviewRecyclerBinding,
-) : RecyclerView.ViewHolder(binding.root) {
+) : ViewHolder(binding.root) {
 
     fun bind(item: ItemReview) {
         setReviewAuthor(item.author)
@@ -203,10 +224,10 @@ sealed class MoviePayloads : Payloads {
 
 sealed class ReviewPayloads : Payloads {
     data class TitleChanged(val newTitle: String) : ReviewPayloads()
-    data class DateChanged(val newDescription: String) : ReviewPayloads()
+    data class DateChanged(val newDate: String) : ReviewPayloads()
     data class RatingChanged(val newRating: String) : ReviewPayloads()
-    data class ContentChanged(val newImage: String) : ReviewPayloads()
-    data class AuthorChanged(val newYear: String) : ReviewPayloads()
+    data class ContentChanged(val newContent: String) : ReviewPayloads()
+    data class AuthorChanged(val newAuthor: String) : ReviewPayloads()
 }
 
 data class ItemReview(

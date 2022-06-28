@@ -1,9 +1,10 @@
-package com.example.movies.data.dto
+package com.example.myapplication.dto
 
 
+import com.example.movies.data.dto.MovieDTO
 import com.google.gson.annotations.SerializedName
 
-data class MovieWatchlist(
+data class MovieList(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")
