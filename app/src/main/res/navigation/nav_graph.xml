@@ -6,6 +6,7 @@
     <fragment
         android:id="@+id/moviesFeed"
         android:name="com.example.movies.ui.FragmentFeed">
+
         <action
             android:id="@+id/action_moviesFeed_to_movieDetails"
             app:destination="@id/movieDetails" />
@@ -26,6 +27,10 @@
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.example.movies.ui.FragmentReview">
+
+        <argument
+            android:name="movieIdReviews"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

@@ -3,6 +3,7 @@ package com.example.movies.data
 import com.example.movies.data.dto.MovieDTO
 import com.example.movies.ui.ItemMovie
 import com.example.movies.ui.ItemReview
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor
@@ -24,7 +25,7 @@ class MovieRepository @Inject constructor
 
     suspend fun getReviews(id: Int): List<ItemReview> {
         return movieService.getReviews(id).results.map {
-            ItemReview (
+            ItemReview(
                 it.id,
                 it.author,
                 it.authorDetails.rating.toString(),

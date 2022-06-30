@@ -1,5 +1,4 @@
-package com.example.myapplication.dto
-
+package com.example.movies.data.dto
 
 import com.example.movies.data.dto.MovieDTO
 import com.google.gson.annotations.SerializedName

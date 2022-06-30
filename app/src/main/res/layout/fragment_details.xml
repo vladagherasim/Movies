@@ -18,100 +18,117 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/movieInfoContainer"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageInDetails"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/_18sdp"
-        android:layout_marginStart="@dimen/padding_small"
-        android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/titleInDetails"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/padding_small"
+        android:layout_marginTop="@dimen/_18sdp"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/white"
-        android:fontFamily="@font/sf_pro_text_semi_bold"
-        android:textSize="@dimen/_13ssp"
-        tools:text="Movie Title"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageInDetails">
+
+        <TextView
+            android:id="@+id/titleInDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Movie Title" />
 
         <ImageView
             android:id="@+id/starSmall"
-            android:src="@drawable/ic_star_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/titleInDetails"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:src="@drawable/ic_star_small"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/_7sdp"/>
+            app:layout_constraintTop_toBottomOf="@+id/titleInDetails" />
 
         <TextView
             android:id="@+id/pointsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/starSmall"
             app:layout_constraintStart_toEndOf="@+id/starSmall"
             app:layout_constraintTop_toTopOf="@+id/starSmall"
-            app:layout_constraintBottom_toBottomOf="@+id/starSmall"
-            android:layout_marginStart="@dimen/_7sdp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/sf_pro_text_semi_bold"
-            android:textSize="@dimen/_10ssp"
-            tools:text="3.4"/>
+            tools:text="3.4" />
 
         <ImageView
             android:id="@+id/calendarSmall"
-            android:src="@drawable/ic_calendar_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/pointsText"
-            app:layout_constraintTop_toBottomOf="@+id/titleInDetails"
             android:layout_marginStart="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_7sdp"/>
+            android:layout_marginTop="@dimen/_7sdp"
+            android:src="@drawable/ic_calendar_small"
+            app:layout_constraintStart_toEndOf="@+id/pointsText"
+            app:layout_constraintTop_toBottomOf="@+id/titleInDetails" />
 
         <TextView
             android:id="@+id/yearTextInDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/starSmall"
             app:layout_constraintStart_toEndOf="@+id/calendarSmall"
             app:layout_constraintTop_toTopOf="@+id/starSmall"
-            app:layout_constraintBottom_toBottomOf="@+id/starSmall"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/sf_pro_text_semi_bold"
-            android:textSize="@dimen/_10ssp"
-            tools:text="2022"/>
+            tools:text="2022" />
 
         <TextView
             android:id="@+id/genresTextInDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/starSmall"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="@dimen/_10sdp"
-            android:textColor="@color/dark_gray_484950"
             android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textColor="@color/dark_gray_484950"
             android:textSize="@dimen/_10ssp"
-            tools:text="Horror Thriller"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/starSmall"
+            tools:text="Horror Thriller" />
 
         <TextView
             android:id="@+id/reviewsOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:fontFamily="@font/sf_pro_text_semi_bold"
+            android:textColor="@color/dark_gray_484950"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/genresTextInDetails"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:textColor="@color/dark_gray_484950"
-            android:fontFamily="@font/sf_pro_text_semi_bold"
-            android:textSize="@dimen/_10ssp"
-            tools:text="This is the review placeholder"/>
+            tools:text="This is the review placeholder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviewsRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieInfoContainer"
         android:layout_marginStart="@dimen/padding_small"
-        />
+        android:layout_marginBottom="@dimen/_80sdp"
+        android:clipToPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieInfoContainer" />
+
+    <Button
+        android:id="@+id/writeReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:background="@drawable/shape_submit_button"
+        android:backgroundTint="@null"
+        android:fontFamily="@font/sf_pro_text_semi_bold"
+        android:text="@string/write_review"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

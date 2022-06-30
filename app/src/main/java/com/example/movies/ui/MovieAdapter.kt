@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import coil.load
 import com.example.movies.R
 import com.example.movies.databinding.ItemMovieFeedBinding
 import com.example.movies.databinding.ItemReviewRecyclerBinding
@@ -106,7 +107,7 @@ class MovieViewHolder (
 
     //TODO figure a correct way to get the image url
     fun setMovieImage(image: String) {
-        //binding.moviePoster.load(image)
+        binding.moviePoster.load(image)
         binding.moviePoster.setImageResource(R.drawable.ic_star_big)
     }
 

@@ -5,8 +5,10 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_star_small.xml" value="0.265" />
         <entry key="app/src/main/res/drawable/shape_review_textbox.xml" value="0.5205" />
+        <entry key="app/src/main/res/drawable/shape_review_title_text_box.xml" value="0.236" />
         <entry key="app/src/main/res/drawable/shape_review_title_textbox.xml" value="0.5205" />
         <entry key="app/src/main/res/drawable/shape_submit_button.xml" value="0.33" />
+        <entry key="app/src/main/res/drawable/shape_submit_button_inactive.xml" value="0.236" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28888888888888886" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.2864583333333333" />
