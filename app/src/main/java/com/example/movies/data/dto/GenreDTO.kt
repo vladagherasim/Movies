@@ -3,7 +3,7 @@ package com.example.movies.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class Genre(
+data class GenreDTO(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")

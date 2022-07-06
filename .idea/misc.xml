@@ -4,15 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_star_small.xml" value="0.265" />
+        <entry key="app/src/main/res/drawable/selector_gray_buttons.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/selector_star.xml" value="0.345" />
+        <entry key="app/src/main/res/drawable/shape_gray_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/shape_gray_button_not_selected.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/shape_review_textbox.xml" value="0.5205" />
         <entry key="app/src/main/res/drawable/shape_review_title_text_box.xml" value="0.236" />
         <entry key="app/src/main/res/drawable/shape_review_title_textbox.xml" value="0.5205" />
+        <entry key="app/src/main/res/drawable/shape_search_bar.xml" value="0.207" />
         <entry key="app/src/main/res/drawable/shape_submit_button.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/shape_submit_button_inactive.xml" value="0.236" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.28888888888888886" />
-        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.2864583333333333" />
-        <entry key="app/src/main/res/layout/fragment_review.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_review.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_feed_recyclerview.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_movie_feed.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_review_recycler.xml" value="0.5" />

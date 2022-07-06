@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movies.data.MovieRepository
+import com.example.movies.data.dto.SearchItem
 import com.example.movies.ui.ItemMovie
 import com.example.movies.utils.assignValue
 import com.example.movies.utils.createListedLiveData
@@ -11,6 +12,7 @@ import com.example.movies.utils.launchOn
 import com.example.movies.utils.toLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,16 +26,31 @@ class FeedViewModel @Inject constructor(private val repository: MovieRepository)
     private val _exceptions = MutableLiveData<Exception>()
     val exceptions = _exceptions.toLiveData()
 
-    init {
-        getMovies()
-    }
+    private val _searchResult = createListedLiveData<ItemMovie>()
+    val searchResult = _searchResult.toLiveData()
 
-    private fun getMovies() {
+    private val key = "d88664a2e2c16e8647ce06f3a02cc096"
+
+    fun getMovies() {
         viewModelScope.launch(Dispatchers.IO) {
             launchOn {
-                repository.getMovies()
+                repository.getMovies(key)
             }.subscribeOver(_exceptions) {
-              _movies.assignValue(this)
+                collectLatest {
+                    _movies.assignValue(it)
+                }
+            }
+        }
+    }
+
+    fun getSearchResults(movieTitle: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            launchOn {
+                repository.getSearchResults(key, movieTitle)
+            }.subscribeOver(_exceptions) {
+                collectLatest {
+                    _searchResult.assignValue(it)
+                }
             }
         }
     }

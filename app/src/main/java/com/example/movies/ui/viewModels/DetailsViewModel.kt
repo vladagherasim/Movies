@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(private val repository: MovieRepository) :
-ViewModel() {
+    ViewModel() {
 
     private val _reviews = createListedLiveData<ItemReview>()
     val reviews = _reviews.toLiveData()
@@ -26,10 +26,12 @@ ViewModel() {
     private val _exceptions = MutableLiveData<Exception>()
     val exceptions = _exceptions.toLiveData()
 
+    private val key = "d88664a2e2c16e8647ce06f3a02cc096"
+
     fun getReviews(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             launchOn {
-                repository.getReviews(id)
+                repository.getReviews(id, key)
             }.subscribeOver(_exceptions) {
                 _reviews.assignValue(this)
             }
@@ -39,7 +41,7 @@ ViewModel() {
     fun getMovie(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             launchOn {
-                repository.getMovieDetails(id)
+                repository.getMovieDetails(id, key)
             }.subscribeOver(_exceptions) {
                 _movieData.assignValue(this)
             }

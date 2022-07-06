@@ -1,11 +1,14 @@
 package com.example.movies.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
@@ -18,7 +21,7 @@ class FragmentDetails : Fragment() {
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
-    private val adapter = MovieAdapter(this::onItemClick)
+    private val adapter = ReviewAdapter()
     private val viewModel by viewModels<DetailsViewModel>()
     private val args: FragmentDetailsArgs by navArgs()
 
@@ -26,10 +29,7 @@ class FragmentDetails : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailsBinding.inflate(inflater)
-        super.onCreate(savedInstanceState)
-        _binding = FragmentDetailsBinding.inflate(layoutInflater)
-
+        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,11 +42,13 @@ class FragmentDetails : Fragment() {
             viewModel.getMovie(id)
             viewModel.movieData.observe(viewLifecycleOwner) { movie ->
                 titleInDetails.text = movie.title
-                imageInDetails.load(movie.backdropPath)
+                val image = movie.backdropPath
+                imageInDetails.load("https://image.tmdb.org/t/p/original$image")
                 titleInDetails.text = movie.title
                 pointsText.text = movie.voteAverage.toString()
-                yearTextInDetails.text = movie.releaseDate
+                yearTextInDetails.text = movie.releaseDate.take(4)
                 genresTextInDetails.text = movie.tagline
+                descriptionText.text = movie.overview
             }
             viewModel.getReviews(id)
             viewModel.reviews.observe(viewLifecycleOwner) { reviews ->
@@ -55,16 +57,37 @@ class FragmentDetails : Fragment() {
             viewModel.exceptions.observe(viewLifecycleOwner) {
                 it.printStackTrace()
             }
+            reviewsOption.isSelected = true
+            descriptionOption.isSelected = false
+            reviewsOption.setOnClickListener {
+                reviewsOption.apply {
+                    isSelected = !isSelected
+                    reviewsRecycler.isVisible = isSelected
+                    descriptionOption.isSelected = !isSelected
+                }
+            }
+            descriptionOption.setOnClickListener {
+                descriptionOption.apply {
+                    isSelected = !isSelected
+                    descriptionText.isVisible = isSelected
+                    reviewsOption.isSelected = !isSelected
+                }
+                val toast = Toast.makeText(context, "Description clicked", Toast.LENGTH_SHORT)
+                toast.show()
+            }
+
+            descriptionOption.setOnClickListener {
+            }
+            writeReviewButton.setOnClickListener {
+                val directions = FragmentDetailsDirections.actionMovieDetailsToReviewFragment(id)
+                findNavController().navigate(directions)
+            }
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    private fun onItemClick(id: Int) {
-        TODO("Not yet implemented")
     }
 
 }

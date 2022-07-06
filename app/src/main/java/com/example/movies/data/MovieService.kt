@@ -1,19 +1,29 @@
 package com.example.movies.data
 
-import com.example.movies.data.dto.MovieDTO
-import com.example.movies.data.dto.MovieList
-import com.example.movies.data.dto.Reviews
+import com.example.movies.data.dto.*
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MovieService {
-    @GET("/discover/movie")
-    suspend fun getMovies(): MovieList
+    @GET("3/discover/movie")
+    suspend fun getMovies(@Query("api_key") apiKey: String): MovieList
 
-    @GET("/movie/{movie_id}/reviews")
-    suspend fun getReviews(@Path("id") id: Int): Reviews
+    @GET("3/movie/{movie_id}/reviews")
+    suspend fun getReviews(@Path("movie_id") id: Int, @Query("api_key") apiKey: String): Reviews
 
-    @GET("/movie/{movie_id}")
-    suspend fun getMovieDetails(@Path("id") id: Int): MovieDTO
+    @GET("3/movie/{movie_id}")
+    suspend fun getMovieDetails(
+        @Path("movie_id") id: Int,
+        @Query("api_key") apiKey: String
+    ): MovieDTO
 
+    @GET("3/genre/movie/list")
+    suspend fun getGenres(@Query("api_key") apiKey: String): GenresResult
+
+    @GET("/3/search/movie")
+    suspend fun searchMovie(
+        @Query("api_key") apiKey: String,
+        @Query("query") movieTitle: String
+    ): SearchResult
 }

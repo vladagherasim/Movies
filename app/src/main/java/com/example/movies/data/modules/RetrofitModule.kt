@@ -14,8 +14,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
-    //TODO get the correct base URL
-    private const val BASE_URL = "https://api.themoviedb.org/3/movie/550?api_key=d88664a2e2c16e8647ce06f3a02cc096"
+    private const val BASE_URL = "https://api.themoviedb.org/"
 
     @Provides
     @Singleton

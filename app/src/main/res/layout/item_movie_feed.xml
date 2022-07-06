@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/movieInFeedContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_18sdp"
     android:background="@color/dark_background_181920">
 
@@ -43,12 +43,11 @@
             android:id="@+id/calendarIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:contentDescription="@string/content_description"
             android:layout_marginStart="@dimen/_14sdp"
             app:layout_constraintStart_toEndOf="@+id/ratingText"
-            app:layout_constraintTop_toTopOf="@id/yearText"
-            app:layout_constraintBottom_toBottomOf="@id/ratingText"
+            app:layout_constraintTop_toTopOf="@id/starIcon"
+            app:layout_constraintBottom_toBottomOf="@id/starIcon"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_calendar_small" />
 
@@ -94,7 +93,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/movieImage"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_73sdp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
@@ -104,9 +103,11 @@
 
         <ImageView
             android:id="@+id/moviePoster"
-            android:layout_width="@dimen/_74sdp"
-            android:layout_height="@dimen/_89sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_90sdp"
             android:contentDescription="@string/content_description"
+            android:cropToPadding="true"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />

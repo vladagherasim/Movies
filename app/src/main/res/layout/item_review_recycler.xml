@@ -13,6 +13,8 @@
         android:id="@+id/star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
         android:src="@drawable/ic_star_small"
         app:layout_constraintBottom_toBottomOf="@id/rating"
         app:layout_constraintStart_toStartOf="parent"
