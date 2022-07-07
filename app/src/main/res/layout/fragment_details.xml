@@ -11,10 +11,10 @@
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fitsSystemWindows="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:fitsSystemWindows="true"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -22,175 +22,197 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/dark_background_181920"
-            android:fitsSystemWindows="true">
+            android:fitsSystemWindows="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                android:fitsSystemWindows="true">
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imageInDetails"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_262sdp"
-                android:cropToPadding="true"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_star_small" />
-
-                <androidx.appcompat.widget.Toolbar
-                    app:layout_constraintTop_toBottomOf="@id/imageInDetails"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_collapseMode="pin">
+                    app:layout_collapseMode="parallax">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/movieInfoContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/padding_small"
-                android:layout_marginTop="@dimen/_18sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent">
+                    <ImageView
+                        android:id="@+id/imageInDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_262sdp"
+                        android:contentDescription="@string/content_description"
+                        android:cropToPadding="true"
+                        android:scaleType="centerCrop"
+                        app:layout_collapseMode="parallax"
 
-                <TextView
-                    android:id="@+id/titleInDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_pro_text_semi_bold"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_13ssp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Movie Title" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_star_small" />
 
-                <ImageView
-                    android:id="@+id/starSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:src="@drawable/ic_star_small"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/titleInDetails" />
 
-                <TextView
-                    android:id="@+id/pointsText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_7sdp"
-                    android:fontFamily="@font/sf_pro_text_semi_bold"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/starSmall"
-                    app:layout_constraintStart_toEndOf="@+id/starSmall"
-                    app:layout_constraintTop_toTopOf="@+id/starSmall"
-                    tools:text="3.4" />
-
-                <ImageView
-                    android:id="@+id/calendarSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_14sdp"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:src="@drawable/ic_calendar_small"
-                    app:layout_constraintStart_toEndOf="@+id/pointsText"
-                    app:layout_constraintTop_toBottomOf="@+id/titleInDetails" />
-
-                <TextView
-                    android:id="@+id/yearTextInDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:fontFamily="@font/sf_pro_text_semi_bold"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10ssp"
-                    app:layout_constraintBottom_toBottomOf="@+id/starSmall"
-                    app:layout_constraintStart_toEndOf="@+id/calendarSmall"
-                    app:layout_constraintTop_toTopOf="@+id/starSmall"
-                    tools:text="2022" />
-
-                <TextView
-                    android:id="@+id/genresTextInDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/sf_pro_text_semi_bold"
-                    android:textColor="@color/dark_gray_484950"
-                    android:textSize="@dimen/_10ssp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/starSmall"
-                    tools:text="Horror Thriller" />
-
-                <TextView
-                    android:id="@+id/reviewsOption"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_25sdp"
-                    android:background="@drawable/selector_gray_buttons"
-                    android:fontFamily="@font/sf_pro_text_semi_bold"
-                    android:gravity="center"
-                    android:text="Reviews"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10ssp"
-                    app:layout_constraintEnd_toStartOf="@+id/descriptionOption"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/genresTextInDetails" />
-
-                <TextView
-                    android:id="@+id/descriptionOption"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_12sdp"
-                    android:background="@drawable/selector_gray_buttons"
-                    android:fontFamily="@font/sf_pro_text_semi_bold"
-                    android:gravity="center"
-                    android:text="Description"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10ssp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/reviewsOption"
-                    app:layout_constraintTop_toBottomOf="@+id/genresTextInDetails" />
-
-                <TextView
-                    android:id="@+id/descriptionText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/padding_small"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/descriptionOption" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.appcompat.widget.Toolbar>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="noScroll"
+                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="48dp"
+                app:layout_collapseMode="pin"
+                app:layout_constraintTop_toBottomOf="@id/imageInDetails"
+                app:toolbarId="@+id/toolbar">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/movieInfoContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding_small"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/titleInDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sf_pro_text_semi_bold"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13ssp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Movie Title" />
+
+                    <ImageView
+                        android:id="@+id/starSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:contentDescription="@string/content_description"
+                        android:src="@drawable/ic_star_small"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/titleInDetails" />
+
+                    <TextView
+                        android:id="@+id/pointsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:fontFamily="@font/sf_pro_text_semi_bold"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintBottom_toBottomOf="@+id/starSmall"
+                        app:layout_constraintStart_toEndOf="@+id/starSmall"
+                        app:layout_constraintTop_toTopOf="@+id/starSmall"
+                        tools:text="3.4" />
+
+                    <ImageView
+                        android:id="@+id/calendarSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_14sdp"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:contentDescription="@string/content_description"
+                        android:src="@drawable/ic_calendar_small"
+                        app:layout_constraintStart_toEndOf="@+id/pointsText"
+                        app:layout_constraintTop_toBottomOf="@+id/titleInDetails" />
+
+                    <TextView
+                        android:id="@+id/yearTextInDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:fontFamily="@font/sf_pro_text_semi_bold"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintBottom_toBottomOf="@+id/starSmall"
+                        app:layout_constraintStart_toEndOf="@+id/calendarSmall"
+                        app:layout_constraintTop_toTopOf="@+id/starSmall"
+                        tools:text="2022" />
+
+                    <TextView
+                        android:id="@+id/genresTextInDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/sf_pro_text_semi_bold"
+                        android:textColor="@color/dark_gray_484950"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/starSmall"
+                        tools:text="Horror Thriller" />
+
+                    <TextView
+                        android:id="@+id/reviewsOption"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding_small"
+                        android:background="@drawable/selector_gray_buttons"
+                        android:fontFamily="@font/sf_pro_text_semi_bold"
+                        android:gravity="center"
+                        android:text="@string/reviews"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp"
+                        android:layout_marginBottom="@dimen/padding_small"
+                        app:layout_constraintEnd_toStartOf="@+id/descriptionOption"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/genresTextInDetails" />
+
+                    <TextView
+                        android:id="@+id/descriptionOption"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/padding_small"
+                        android:layout_marginTop="@dimen/padding_small"
+                        android:layout_marginEnd="@dimen/_12sdp"
+                        android:background="@drawable/selector_gray_buttons"
+                        android:fontFamily="@font/sf_pro_text_semi_bold"
+                        android:gravity="center"
+                        android:text="@string/description"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/reviewsOption"
+                        app:layout_constraintTop_toBottomOf="@+id/genresTextInDetails" />
+
+                    <TextView
+                        android:id="@+id/descriptionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_17sdp"
+                        android:fontFamily="@font/sf_pro_text_medium"
+                        android:textColor="@color/gray_text_c7c7c7"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/descriptionOption" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
         </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reviewsRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/padding_small"
-                android:layout_marginBottom="@dimen/_65sdp"
-                android:clipToPadding="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraint" />
-
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reviewsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/padding_small"
+            android:layout_marginEnd="@dimen/padding_small"
+            android:layout_marginBottom="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/padding_small"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

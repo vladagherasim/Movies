@@ -1,10 +1,12 @@
 package com.example.movies.ui
 
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import com.example.movies.R
 import com.example.movies.databinding.FragmentDetailsBinding
 import com.example.movies.ui.viewModels.DetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +36,7 @@ class FragmentDetails : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = args.movieId
@@ -51,19 +55,26 @@ class FragmentDetails : Fragment() {
                 descriptionText.text = movie.overview
             }
             viewModel.getReviews(id)
+            viewModel.getReviewsNumber(id)
             viewModel.reviews.observe(viewLifecycleOwner) { reviews ->
                 adapter.submitList(reviews)
+            }
+            viewModel.totalReviews.observe(viewLifecycleOwner) { totalReviews ->
+                reviewsOption.text = getString(R.string.reviews, totalReviews.toString())
             }
             viewModel.exceptions.observe(viewLifecycleOwner) {
                 it.printStackTrace()
             }
             reviewsOption.isSelected = true
             descriptionOption.isSelected = false
+            reviewsRecycler.isVisible = true
+            descriptionText.isVisible = false
             reviewsOption.setOnClickListener {
                 reviewsOption.apply {
                     isSelected = !isSelected
                     reviewsRecycler.isVisible = isSelected
                     descriptionOption.isSelected = !isSelected
+                    descriptionText.isVisible = !isSelected
                 }
             }
             descriptionOption.setOnClickListener {
@@ -71,12 +82,8 @@ class FragmentDetails : Fragment() {
                     isSelected = !isSelected
                     descriptionText.isVisible = isSelected
                     reviewsOption.isSelected = !isSelected
+                    reviewsRecycler.isVisible = !isSelected
                 }
-                val toast = Toast.makeText(context, "Description clicked", Toast.LENGTH_SHORT)
-                toast.show()
-            }
-
-            descriptionOption.setOnClickListener {
             }
             writeReviewButton.setOnClickListener {
                 val directions = FragmentDetailsDirections.actionMovieDetailsToReviewFragment(id)

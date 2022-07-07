@@ -9,4 +9,6 @@
     <string name="give_review_title">Give a title</string>
     <string name="write_review">Write a review</string>
     <string name="search">Search</string>
+    <string name="reviews">Reviews (%s)</string>
+    <string name="description">Description</string>
 </resources>

@@ -5,7 +5,7 @@
     android:id="@+id/movieInFeedContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_18sdp"
+    android:layout_marginBottom="@dimen/_18sdp"
     android:background="@color/dark_background_181920">
 
     <androidx.constraintlayout.widget.ConstraintLayout

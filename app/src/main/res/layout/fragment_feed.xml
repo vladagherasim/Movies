@@ -6,14 +6,20 @@
     android:layout_height="match_parent"
     android:background="@color/dark_background_181920"
     tools:context=".ui.FragmentFeed">
+
     <EditText
         android:id="@+id/searchBar"
         android:inputType="text"
+        android:textColorHint="@color/search_gray_696a76"
         android:hint="@string/search"
         android:autofillHints="name"
+        android:drawablePadding="@dimen/_3sdp"
         android:layout_width="0dp"
         android:layout_marginTop="@dimen/_27sdp"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_vector_search"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
         android:textColor="@color/search_gray_696a76"
         android:fontFamily="@font/sf_pro_text_regular"
         android:textSize="@dimen/_14ssp"
