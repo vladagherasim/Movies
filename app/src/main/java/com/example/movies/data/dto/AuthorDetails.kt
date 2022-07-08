@@ -8,7 +8,7 @@ data class AuthorDetails(
     @SerializedName("name")
     val name: String,
     @SerializedName("rating")
-    val rating: Any,
+    val rating: Any?,
     @SerializedName("username")
     val username: String
 )

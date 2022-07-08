@@ -2,6 +2,7 @@ package com.example.movies.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.databinding.ItemReviewRecyclerBinding
@@ -40,6 +41,7 @@ class ReviewAdapter : ListAdapter<Item, ReviewViewHolder>(ItemDiffCallbacks()) {
         }
     }
 }
+
 sealed class ReviewPayloads : Payloads {
     data class TitleChanged(val newTitle: String) : ReviewPayloads()
     data class DateChanged(val newDate: String) : ReviewPayloads()
@@ -61,6 +63,9 @@ class ReviewViewHolder(
     }
 
     fun setReviewTitle(title: String) {
+        if (title == "") {
+            binding.titleReview.isVisible = false
+        }
         binding.titleReview.text = title
     }
 
@@ -70,6 +75,10 @@ class ReviewViewHolder(
 
     fun setReviewRating(rating: String) {
         binding.rating.text = rating
+        if (rating == "") {
+            binding.star.isVisible = false
+            binding.rating.isVisible = false
+        }
     }
 
     fun setReviewAuthor(author: String) {

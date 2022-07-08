@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movies.data.MovieRepository
-import com.example.movies.data.dto.SearchItem
 import com.example.movies.ui.ItemMovie
 import com.example.movies.utils.assignValue
 import com.example.movies.utils.createListedLiveData
@@ -26,9 +25,6 @@ class FeedViewModel @Inject constructor(private val repository: MovieRepository)
     private val _exceptions = MutableLiveData<Exception>()
     val exceptions = _exceptions.toLiveData()
 
-    private val _searchResult = createListedLiveData<ItemMovie>()
-    val searchResult = _searchResult.toLiveData()
-
     private val key = "d88664a2e2c16e8647ce06f3a02cc096"
 
     fun getMovies() {
@@ -49,7 +45,7 @@ class FeedViewModel @Inject constructor(private val repository: MovieRepository)
                 repository.getSearchResults(key, movieTitle)
             }.subscribeOver(_exceptions) {
                 collectLatest {
-                    _searchResult.assignValue(it)
+                    _movies.assignValue(it)
                 }
             }
         }

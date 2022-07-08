@@ -2,7 +2,6 @@ package com.example.movies.ui
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +42,12 @@ class FragmentDetails : Fragment() {
         binding.apply {
             reviewsRecycler.adapter = adapter
             reviewsRecycler.layoutManager = LinearLayoutManager(context)
+
+            reviewsOption.isSelected = true
+            descriptionOption.isSelected = false
+            reviewsRecycler.isVisible = true
+            descriptionText.isVisible = false
+
             viewModel.getMovie(id)
             viewModel.movieData.observe(viewLifecycleOwner) { movie ->
                 titleInDetails.text = movie.title
@@ -60,15 +65,18 @@ class FragmentDetails : Fragment() {
                 adapter.submitList(reviews)
             }
             viewModel.totalReviews.observe(viewLifecycleOwner) { totalReviews ->
-                reviewsOption.text = getString(R.string.reviews, totalReviews.toString())
+                if (totalReviews > 0) {
+                    reviewsOption.text = getString(R.string.reviews, totalReviews.toString())
+                } else {
+                    reviewsOption.isVisible = false
+                    descriptionOption.isSelected = true
+                    descriptionText.isVisible = true
+                }
             }
             viewModel.exceptions.observe(viewLifecycleOwner) {
                 it.printStackTrace()
             }
-            reviewsOption.isSelected = true
-            descriptionOption.isSelected = false
-            reviewsRecycler.isVisible = true
-            descriptionText.isVisible = false
+
             reviewsOption.setOnClickListener {
                 reviewsOption.apply {
                     isSelected = !isSelected

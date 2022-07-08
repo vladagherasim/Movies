@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.databinding.FragmentFeedBinding
 import com.example.movies.ui.viewModels.FeedViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -34,23 +33,24 @@ class FragmentFeed : Fragment() {
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getMovies()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             feedRecyclerView.adapter = adapter
             feedRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            viewModel.getMovies()
+
             viewModel.movies.observe(viewLifecycleOwner) {
                 adapter.submitList(it)
             }
 
             viewModel.exceptions.observe(viewLifecycleOwner) {
                 it.printStackTrace()
-            }
-
-            viewModel.searchResult.observe(viewLifecycleOwner) {
-                adapter.submitList(it)
             }
 
             var job: Job? = null

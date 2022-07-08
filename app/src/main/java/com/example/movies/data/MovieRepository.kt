@@ -8,13 +8,10 @@ import com.example.movies.data.database.GenreDao
 import com.example.movies.data.dto.MovieDTO
 import com.example.movies.ui.ItemMovie
 import com.example.movies.ui.ItemReview
+import com.example.movies.utils.DateManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.util.*
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor
@@ -49,15 +46,13 @@ class MovieRepository @Inject constructor
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getReviews(id: Int, key: String): List<ItemReview> {
         return movieService.getReviews(id, key).results.map {
-            val instant = Instant.parse ( it.updatedAt )
-            val date = Date(instant.epochSecond * 1000)
-            //DateManager.convertFromISO(it.updatedAt)
+            val rating = it.authorDetails.rating ?: ""
             ItemReview(
                 it.id,
                 it.authorDetails.username,
-                it.authorDetails.rating.toString(),
+                rating.toString(),
                 it.authorDetails.name,
-                SimpleDateFormat("yyyy-MM-dd").format(date).toString(),
+                DateManager.convertFromISO(it.updatedAt),
                 it.content
             )
         }
@@ -79,7 +74,7 @@ class MovieRepository @Inject constructor
         }
     }
 
-   suspend fun getReviewsNumber(key: String, id: Int) : Flow<Int> {
+    suspend fun getReviewsNumber(key: String, id: Int): Flow<Int> {
         return flowOf(movieService.getReviews(id, key).totalResults)
     }
 
