@@ -11,4 +11,7 @@
     <string name="search">Search</string>
     <string name="reviews">Reviews (%s)</string>
     <string name="description">Description</string>
+    <string name="ok">OK</string>
+    <string name="review_submitted">Your review was submitted. Thank you!</string>
+    <string name="success">Success!</string>
 </resources>

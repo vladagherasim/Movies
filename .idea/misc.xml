@@ -17,9 +17,12 @@
         <entry key="app/src/main/res/drawable/shape_submit_button.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/shape_submit_button_inactive.xml" value="0.236" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/collection_demo.xml" value="0.22257194244604317" />
+        <entry key="app/src/main/res/layout/fragment_description_option.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.2864583333333333" />
-        <entry key="app/src/main/res/layout/fragment_review.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_review.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_review_option.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/item_feed_recyclerview.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_movie_feed.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_review_recycler.xml" value="0.5" />

@@ -22,7 +22,7 @@ plugins {
 ext {
     splashScreenVersion = "1.0.0-rc01"
     kotlin_version = '1.6.20'
-    activityVersion = '1.4.0'
+    activityVersion = '1.5.0'
     appCompatVersion = '1.4.0'
     constraintLayoutVersion = '2.1.2'
     coreTestingVersion = '2.1.0'
@@ -30,7 +30,7 @@ ext {
     lifecycleVersion = '2.5.0'
     materialVersion = '1.6.1'
     roomVersion = '2.4.2'
-    fragment_version = '1.4.1'
+    fragment_version = '1.5.0'
     // testing
     junitVersion = '4.13.2'
     espressoVersion = '3.4.0'

@@ -1,16 +1,15 @@
 package com.example.movies.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import com.example.movies.databinding.ItemMovieFeedBinding
 
 class MovieAdapter(
     private val itemClickListener: (Int) -> Unit
-) : ListAdapter<Item, MovieViewHolder>(ItemDiffCallbacks()) {
+) : PagingDataAdapter<Item, MovieViewHolder>(ItemDiffCallbacks()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
 
@@ -64,7 +63,9 @@ class MovieViewHolder(
     }
 
     fun setMovieImage(image: String) {
-        binding.moviePoster.load("https://image.tmdb.org/t/p/w500$image")
+        binding.moviePoster.load(image) {
+            crossfade(400)
+        }
     }
 
     fun setMovieTitle(title: String) {

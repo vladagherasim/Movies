@@ -1,14 +1,16 @@
 package com.example.movies.data
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
+import androidx.paging.*
 import com.example.movies.data.database.Genre
 import com.example.movies.data.database.GenreDao
 import com.example.movies.data.dto.MovieDTO
 import com.example.movies.ui.ItemMovie
 import com.example.movies.ui.ItemReview
+import com.example.movies.ui.pagingSources.RegularMoviePagingSource
+import com.example.movies.ui.pagingSources.SearchMoviePagingSource
 import com.example.movies.utils.DateManager
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
@@ -19,22 +21,33 @@ class MovieRepository @Inject constructor
     private val movieService: MovieService,
     private val genreDao: GenreDao
 ) {
+    private fun regularMoviePagingSource(coroutineScope: CoroutineScope) = Pager(
+        config = PagingConfig(pageSize = 20),
+        pagingSourceFactory = { RegularMoviePagingSource(movieService) }
+    ).flow.cachedIn(coroutineScope)
 
-    suspend fun getMovies(key: String): Flow<List<ItemMovie>> {
+    private fun searchMoviePagingSource(searchString: String, coroutineScope: CoroutineScope) =
+        Pager(
+            config = PagingConfig(pageSize = 20),
+            pagingSourceFactory = { SearchMoviePagingSource(movieService, searchString) }
+        ).flow.cachedIn(coroutineScope)
+
+    fun getMovies(coroutineScope: CoroutineScope): Flow<PagingData<ItemMovie>> {
         return combine(
-            flowOf(movieService.getMovies(key)), genreDao.getGenres()
+            regularMoviePagingSource(coroutineScope),
+            genreDao.getGenres()
         ) { remote, db ->
             val genres = db.map { Genre(it.id, it.name) }
-            remote.results.map { movie ->
+            remote.map { movie ->
                 ItemMovie(
                     movie.id,
                     movie.title,
                     movie.voteAverage,
-                    movie.posterPath.toString(),
+                    "https://image.tmdb.org/t/p/original${movie.posterPath}",
                     movie.releaseDate.take(4),
                     movie.genres.mapNotNull { genreID ->
-                        genres.find {
-                            it.id == genreID
+                        genres.find { genre ->
+                            genre.id == genreID
                         }?.name
                     }.joinToString(separator = ", ")
                 )
@@ -43,7 +56,6 @@ class MovieRepository @Inject constructor
     }
 
     @SuppressLint("SimpleDateFormat")
-    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getReviews(id: Int, key: String): List<ItemReview> {
         return movieService.getReviews(id, key).results.map {
             val rating = it.authorDetails.rating ?: ""
@@ -78,22 +90,25 @@ class MovieRepository @Inject constructor
         return flowOf(movieService.getReviews(id, key).totalResults)
     }
 
-    suspend fun getSearchResults(key: String, movieTitle: String): Flow<List<ItemMovie>> {
+    fun getSearchResults(
+        movieTitle: String,
+        coroutineScope: CoroutineScope
+    ): Flow<PagingData<ItemMovie>> {
         return combine(
-            flowOf(movieService.searchMovie(key, movieTitle.replace("\\s".toRegex(), "+"))),
+            searchMoviePagingSource(movieTitle.replace("\\s".toRegex(), "+"), coroutineScope),
             genreDao.getGenres()
         ) { remote, db ->
             val genres = db.map { Genre(it.id, it.name) }
-            remote.searchItems.map { movie ->
+            remote.map { movie ->
                 ItemMovie(
                     movie.id,
                     movie.title,
                     movie.voteAverage,
-                    movie.posterPath ?: "",
+                    "https://image.tmdb.org/t/p/original${movie.posterPath}",
                     movie.releaseDate?.take(4) ?: "",
                     movie.genreIds.mapNotNull { genreID ->
-                        genres.find {
-                            it.id == genreID
+                        genres.find { genre ->
+                            genre.id == genreID
                         }?.name
                     }.joinToString(separator = ", ")
                 )

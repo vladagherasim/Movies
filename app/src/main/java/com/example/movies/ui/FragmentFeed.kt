@@ -1,6 +1,7 @@
 package com.example.movies.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.databinding.FragmentFeedBinding
 import com.example.movies.ui.viewModels.FeedViewModel
+import com.example.movies.utils.getNavOptions
+import com.example.movies.utils.safeLaunch
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -35,7 +40,7 @@ class FragmentFeed : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getMovies()
+        loadData("")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,28 +50,44 @@ class FragmentFeed : Fragment() {
             feedRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-            viewModel.movies.observe(viewLifecycleOwner) {
-                adapter.submitList(it)
-            }
-
             viewModel.exceptions.observe(viewLifecycleOwner) {
                 it.printStackTrace()
             }
 
+
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.apply {
             var job: Job? = null
             searchBar.doOnTextChanged { text, _, _, _ ->
                 job?.cancel()
                 job = lifecycleScope.launch {
                     delay(500)
                     val searchText = text.toString()
-                    if (searchText.isEmpty()) {
-                        viewModel.getMovies()
-                    } else {
-                        viewModel.getSearchResults(searchText)
-                    }
+                    loadData(searchText)
+                    Log.d("Text", "Text changed")
                 }
             }
         }
+    }
+
+    private fun loadData(searchText: String) {
+        lifecycleScope.safeLaunch(::onError) {
+            getMovies(searchText)
+        }
+    }
+
+    private suspend fun getMovies(searchText: String) {
+        viewModel.getMovies(searchText).collectLatest {
+            adapter.submitData(it.map { it })
+        }
+    }
+
+    private fun onError(error: Exception) {
+        error.printStackTrace()
     }
 
     override fun onDestroy() {
@@ -76,6 +97,6 @@ class FragmentFeed : Fragment() {
 
     private fun onItemClick(id: Int) {
         val directions = FragmentFeedDirections.actionMoviesFeedToMovieDetails(id)
-        findNavController().navigate(directions)
+        findNavController().navigate(directions, getNavOptions())
     }
 }

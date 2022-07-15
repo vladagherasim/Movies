@@ -5,16 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.example.movies.R
 import com.example.movies.databinding.FragmentReviewBinding
 import com.example.movies.ui.viewModels.ReviewViewModel
 import com.example.movies.utils.hideKeyboard
 import com.example.movies.utils.setOnFocused
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class FragmentReview : Fragment() {
@@ -39,7 +42,9 @@ class FragmentReview : Fragment() {
         viewModel.getMovie(id)
         viewModel.movieData.observe(viewLifecycleOwner) {
             val image = it.backdropPath
-            binding.movieReviewImage.load("https://image.tmdb.org/t/p/w500$image")
+            binding.movieReviewImage.load("https://image.tmdb.org/t/p/w500$image") {
+                crossfade(600)
+            }
             binding.movieTitle.text = it.title
         }
         viewModel.exceptions.observe(viewLifecycleOwner) {
@@ -62,8 +67,8 @@ class FragmentReview : Fragment() {
 
             reviewText.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    submitButton.isVisible = true
                     reviewText.hideKeyboard()
+                    submitButton.isVisible = true
                     true
                 } else false
             }
@@ -80,48 +85,37 @@ class FragmentReview : Fragment() {
                 reviewTitle.setText("")
                 submitButton.isEnabled = false
                 appBarReview.setExpanded(true)
+                showDialog()
             }
+            starClickListeners()
         }
+    }
 
+    private fun showDialog() {
+        val builder = AlertDialog.Builder(this.requireContext())
+        builder.setMessage(R.string.review_submitted)
+            .setNeutralButton(R.string.ok) { _, _ ->
+                starsClear()
+            }
+            .show()
     }
 
     private fun starClickListeners() {
         binding.apply {
-            oneStar.setOnClickListener {
-                oneStar.isSelected = true
-                twoStar.isSelected = false
-                threeStar.isSelected = false
-                fourStar.isSelected = false
-                fiveStar.isSelected = false
+            val stars = listOf(oneStar, twoStar, threeStar, fourStar, fiveStar)
+            stars.forEachIndexed { index, star ->
+                star.setOnClickListener {
+                    stars.takeLast(stars.size - index - 1).forEach { it.isSelected = false }
+                    stars.take(index + 1).forEach { it.isSelected = true }
+                }
             }
-            twoStar.setOnClickListener {
-                oneStar.isSelected = true
-                twoStar.isSelected = true
-                threeStar.isSelected = false
-                fourStar.isSelected = false
-                fiveStar.isSelected = false
-            }
-            threeStar.setOnClickListener {
-                oneStar.isSelected = true
-                twoStar.isSelected = true
-                threeStar.isSelected = true
-                fourStar.isSelected = false
-                fiveStar.isSelected = false
-            }
-            fourStar.setOnClickListener {
-                oneStar.isSelected = true
-                twoStar.isSelected = true
-                threeStar.isSelected = true
-                fourStar.isSelected = true
-                fiveStar.isSelected = false
-            }
-            fiveStar.setOnClickListener {
-                oneStar.isSelected = true
-                twoStar.isSelected = true
-                threeStar.isSelected = true
-                fourStar.isSelected = true
-                fiveStar.isSelected = true
-            }
+        }
+    }
+
+    private fun starsClear() {
+        binding.apply {
+            val stars = listOf(oneStar, twoStar, threeStar, fourStar, fiveStar)
+            stars.forEach { it.isSelected = false }
         }
     }
 

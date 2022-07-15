@@ -33,4 +33,14 @@
             app:argType="integer" />
     </fragment>
 
+    <fragment
+        android:id="@+id/reviewOptionsFragment"
+        android:name="com.example.movies.ui.FragmentReviewOption">
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+
+    </fragment>
+
 </navigation>

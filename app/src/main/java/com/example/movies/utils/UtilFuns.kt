@@ -3,10 +3,12 @@ package com.example.movies.utils
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import androidx.navigation.NavOptions
+import com.example.movies.R
+import kotlinx.coroutines.*
 
 suspend fun <T> launchOn(call: suspend () -> T): DataResult<T> {
     return try {
@@ -20,6 +22,7 @@ suspend fun <T> launchOn(call: suspend () -> T): DataResult<T> {
 fun <T> createListedLiveData(): MutableLiveData<List<T>> {
     return MutableLiveData()
 }
+
 fun <T> createLiveData(): MutableLiveData<T> {
     return MutableLiveData()
 }
@@ -45,6 +48,28 @@ fun View.setOnFocused(action: () -> Unit) {
 fun View.hideKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(windowToken, 0)
+}
+
+fun getNavOptions(): NavOptions {
+    return NavOptions.Builder()
+        .setEnterAnim(R.anim.slide_left)
+        .setExitAnim(R.anim.wait)
+        .setPopEnterAnim(R.anim.wait)
+        .setPopExitAnim(R.anim.slide_right)
+        .build()
+}
+
+inline fun LifecycleCoroutineScope.safeLaunch(
+    onError: (Exception) -> Unit,
+    crossinline action: suspend () -> Unit
+) {
+    try {
+        launchWhenStarted {
+            action()
+        }
+    } catch (e: Exception) {
+        onError(e)
+    }
 }
 
 

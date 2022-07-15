@@ -1,17 +1,19 @@
 package com.example.movies.ui.viewModels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import com.example.movies.data.MovieRepository
 import com.example.movies.ui.ItemMovie
-import com.example.movies.utils.assignValue
-import com.example.movies.utils.createListedLiveData
-import com.example.movies.utils.launchOn
-import com.example.movies.utils.toLiveData
+import com.example.movies.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,35 +21,14 @@ import javax.inject.Inject
 class FeedViewModel @Inject constructor(private val repository: MovieRepository) :
     ViewModel() {
 
-    private val _movies = createListedLiveData<ItemMovie>()
-    val movies = _movies.toLiveData()
-
     private val _exceptions = MutableLiveData<Exception>()
     val exceptions = _exceptions.toLiveData()
 
-    private val key = "d88664a2e2c16e8647ce06f3a02cc096"
-
-    fun getMovies() {
-        viewModelScope.launch(Dispatchers.IO) {
-            launchOn {
-                repository.getMovies(key)
-            }.subscribeOver(_exceptions) {
-                collectLatest {
-                    _movies.assignValue(it)
-                }
-            }
-        }
-    }
-
-    fun getSearchResults(movieTitle: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            launchOn {
-                repository.getSearchResults(key, movieTitle)
-            }.subscribeOver(_exceptions) {
-                collectLatest {
-                    _movies.assignValue(it)
-                }
-            }
+    fun getMovies(movieTitle: String): Flow<PagingData<ItemMovie>> {
+        return if (movieTitle.isBlank()) {
+            repository.getMovies(viewModelScope)
+        } else {
+            repository.getSearchResults(movieTitle, viewModelScope)
         }
     }
 
